@@ -58,3 +58,15 @@ class wordqlockLayout(wordqlockTimeHandler):
 
     def getLetterField(self):
         return self.letterField;
+        
+    def getHourCfg(self):
+        return self.hourcfgs;
+        
+    def getMinuteCfg(self):
+        return self.minutecfgs;
+        
+    def getStaticIndices(self):
+        return self.staticIndices;
+        
+    def getOclockIndices(self):
+        return self.oclockIndices;

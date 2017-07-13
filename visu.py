@@ -17,7 +17,7 @@ class WordqlockVisu(QMainWindow):
         super().__init__()
         
         self.timer = QTimer(); 
-        self.timer.setInterval(100)
+        self.timer.setInterval(1000)
         self.initUI()
         
         
@@ -56,6 +56,7 @@ class WordqlockVisu(QMainWindow):
     def drawText(self, event, qp):
         offset = 3;
         offsety = 3;
+        self.layout.updateTime()
         for i in range(len(self.layout.letterField)):
             offsety +=10;
             offset = 3;

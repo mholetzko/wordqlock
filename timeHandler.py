@@ -10,7 +10,7 @@ class wordqlockTimeHandler():
 
         
     def updateTime(self):
-        self.currentTime = t.datetime.now();
+        self.currentTime = self.currentTime + t.timedelta(minutes=5);
 
     def getTableTime(self,hour):
         if self.currentTime.minute >= 25:
@@ -24,34 +24,40 @@ class wordqlockTimeHandler():
                 
 
     def getCurrentMinuteCfg(self):
-        self.updateTime()
+        
         uIdx = 0;
-        for i in range(len(self.minutecfgs) - 1 ):
-            if self.currentTime.minute >= self.minutecfgs[i][1] and self.currentTime.minute < self.minutecfgs[i+1][1]:
+        minCfg = self.getMinuteCfg();
+
+        for i in range(len(minCfg) - 1 ):
+            if self.currentTime.minute >= minCfg[i][1] and self.currentTime.minute < minCfg[i+1][1]:
                    
                 #print("INDEX" + str(i) + self.minutecfgs[i][0]);
                 uIdx = i;
 
-        return self.minutecfgs[uIdx][2]
+        return minCfg[uIdx][2]
 
     def getCurrentHourCfg(self):
-        self.updateTime()
-        table = self.hourcfgs[self.getTableTime(self.currentTime.hour)][2]
+        
+        hourCfg = self.getHourCfg();
+
+        table = hourCfg[self.getTableTime(self.currentTime.hour)][2]
         #todo handle special case EIN(S)
         if self.currentTime.minute < 5 and self.currentTime.hour == 1:
             table = table[:-1];
         return table
         
     def getCurrentMinuteOffset(self):
-        self.updateTime()
+        
         offset = 0;
-        for i in range(len(self.minutecfgs) - 1 ):
-            if self.currentTime.minute >= self.minutecfgs[i][1] and self.currentTime.minute < self.minutecfgs[i+1][1]:
-                offset = self.currentTime.minute - self.minutecfgs[i][1];
+        minCfg = self.getMinuteCfg();
+
+        for i in range(len(minCfg) - 1 ):
+            if self.currentTime.minute >= minCfg[i][1] and self.currentTime.minute < minCfg[i+1][1]:
+                offset = self.currentTime.minute - minCfg[i][1];
         return [x for x in range(offset)]
 
     def getCurrentSecondOffset(self):
-        self.updateTime()
+        
         return self.currentTime.second
 
     def getActiveByTable(self,table,row,col,pred):
@@ -66,10 +72,10 @@ class wordqlockTimeHandler():
         
         bRet = False;
         uRet = 0;
-        uRet = uRet + self.getActiveByTable(self.staticIndices        ,row,col,True);
+        uRet = uRet + self.getActiveByTable(self.getStaticIndices()   ,row,col,True);
         uRet = uRet + self.getActiveByTable(self.getCurrentMinuteCfg(),row,col,True);
         uRet = uRet + self.getActiveByTable(self.getCurrentHourCfg()  ,row,col,True);
-        uRet = uRet + self.getActiveByTable(self.oclockIndices        ,row,col,(self.currentTime.minute < 5));
+        uRet = uRet + self.getActiveByTable(self.getOclockIndices()   ,row,col,(self.currentTime.minute < 5));
 
         if uRet > 0:
             bRet = True;
