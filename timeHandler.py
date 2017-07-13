@@ -8,7 +8,6 @@ class wordqlockTimeHandler(wordqlockLayout):
     def __init__(self):
         
         super().__init__()
-        self.layout         = wordqlockLayout();
         self.currentTime    = t.datetime.now();
         self.activeIndices  = [];
         self.fakeTime       = False;
