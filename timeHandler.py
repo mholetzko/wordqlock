@@ -50,7 +50,7 @@ class wordqlockTimeHandler():
                    
                 #print("INDEX" + str(i) + self.minutecfgs[i][0]);
                 offset = self.currentTime.minute - self.minutecfgs[i][1];
-        print(offset)
+        #print(offset)
         return [x for x in range(offset)]
 
     def getCurrentSecondOffset(self):

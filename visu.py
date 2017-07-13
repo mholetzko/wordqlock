@@ -31,7 +31,7 @@ class WordqlockVisu(QMainWindow):
         self.timer.start();
 
     def paintEvent(self, event):
-        print("PAINT EVENT")
+        #print("PAINT EVENT")
         qp = QPainter()
         qp.begin(self)
         self.drawText(event, qp)
@@ -72,8 +72,8 @@ class WordqlockVisu(QMainWindow):
         #print(len(self.layout.letterField)); 
 
     def update(self):
-        print(" ############################### Here")
-        print(" ******************************* Here")
+        #print(" ############################### Here")
+        #print(" ******************************* Here")
         self.repaint()
 
         
