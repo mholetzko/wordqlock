@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from timeHandler import wordqlockTimeHandler
-
-class wordqlockLayout(wordqlockTimeHandler):
+class wordqlockLayout():
     
     def __init__(self):
-        super().__init__()
         
         self.letterField = [];
         self.letterField.append(["E","S","K","I","S","T","A","F","U","N","F"])
@@ -21,6 +18,8 @@ class wordqlockLayout(wordqlockTimeHandler):
         
         self.staticIndices = [(0,0),(0,1),(0,3),(0,4),(0,5)];
         self.oclockIndices = [(9,8),(9,9),(9,10)];
+        self.amIndices     = [(5,5),(6,5)];
+        self.pmIndices     = [(6,4),(6,5)];
         
         #The first  triple element is soley for debugging and printing purpose
         #The second triple element is denoting the discretizied minute position where we wanna have transitions
@@ -70,3 +69,9 @@ class wordqlockLayout(wordqlockTimeHandler):
         
     def getOclockIndices(self):
         return self.oclockIndices;
+        
+    def getamIndices(self):
+        return self.amIndices;
+        
+    def getpmIndices(self):
+        return self.pmIndices;

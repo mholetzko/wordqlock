@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 
+from layout import wordqlockLayout
 import datetime as t
 
-class wordqlockTimeHandler():
+class wordqlockTimeHandler(wordqlockLayout):
     
     def __init__(self):
-        self.currentTime = t.datetime.now();
-        self.activeIndices = [];
-
         
+        super().__init__()
+        self.layout         = wordqlockLayout();
+        self.currentTime    = t.datetime.now();
+        self.activeIndices  = [];
+        self.fakeTime       = False;
+
     def updateTime(self):
-        self.currentTime = self.currentTime + t.timedelta(minutes=5);
+        if not(self.fakeTime):
+            self.currentTime = t.datetime.now()
+        else:  
+            self.currentTime = self.currentTime + t.timedelta(minutes=5);
 
     def getTableTime(self,hour):
         if self.currentTime.minute >= 25:
@@ -76,6 +83,8 @@ class wordqlockTimeHandler():
         uRet = uRet + self.getActiveByTable(self.getCurrentMinuteCfg(),row,col,True);
         uRet = uRet + self.getActiveByTable(self.getCurrentHourCfg()  ,row,col,True);
         uRet = uRet + self.getActiveByTable(self.getOclockIndices()   ,row,col,(self.currentTime.minute < 5));
+        uRet = uRet + self.getActiveByTable(self.getamIndices()       ,row,col,(self.currentTime.hour   <= 12));
+        uRet = uRet + self.getActiveByTable(self.getpmIndices()       ,row,col,(self.currentTime.hour   >  12));
 
         if uRet > 0:
             bRet = True;

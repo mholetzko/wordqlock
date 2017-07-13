@@ -6,10 +6,10 @@
 
 import sys
 from PyQt5.QtWidgets import QApplication,QMainWindow
-from PyQt5.QtGui import QPainter, QColor, QFont
-from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui     import QPainter, QColor, QFont
+from PyQt5.QtCore    import Qt, QTimer
 
-from layout      import wordqlockLayout
+from timeHandler     import wordqlockTimeHandler
 
 class WordqlockVisu(QMainWindow):
     
@@ -17,27 +17,36 @@ class WordqlockVisu(QMainWindow):
         super().__init__()
         
         self.timer = QTimer(); 
-        self.timer.setInterval(1000)
+        self.timer.setInterval(500)
         self.initUI()
+        self.debug      = False
+        self.bitMapSReg = [[x for x in range(11)] for x in range(10)]
         
         
     def initUI(self):      
 
-        self.layout = wordqlockLayout();
+        self.timeHandler = wordqlockTimeHandler();
         self.setStyleSheet("background-color: black")
         self.setGeometry(100, 100, 220, 250)
-        self.setWindowTitle('WordQlockLayout')  
+        self.setWindowTitle('WordQlocktimeHandler')  
         self.timer.timeout.connect(self.update)
         self.timer.start();
 
     def paintEvent(self, event):
         qp = QPainter()
         qp.begin(self)
-        self.drawText(event, qp)
-        self.drawRectangle(qp)
+        self.setLetterBitValues(event, qp)
+        self.drawRectangles(qp)
         qp.end()
         
-    def drawRectangle(self, qp):
+    def drawTimeBoxes(self,qp):
+        for x in self.timeHandler.getCurrentMinuteOffset():
+            qp.setBrush(Qt.red)
+            qp.drawRect(15 + x*60, 15, 10, 10)
+        qp.setBrush(Qt.red)
+        qp.drawRect(15, 220, 10+ 3*self.timeHandler.getCurrentSecondOffset(), 10)
+        
+    def drawRectangles(self, qp):
       
         col = QColor(0, 0, 0)
         col.setNamedColor('#d4d4d4')
@@ -45,32 +54,41 @@ class WordqlockVisu(QMainWindow):
         qp.setOpacity(0.25)
         qp.setBrush(Qt.darkGray)
         qp.drawRect(10, 10, 200, 230)
-        for x in self.layout.getCurrentMinuteOffset():
-            qp.setBrush(Qt.red)
-            qp.drawRect(15 + x*60, 15, 10, 10)
-        qp.setBrush(Qt.red)
-        qp.drawRect(15, 220, 10+ 3*self.layout.getCurrentSecondOffset(), 10)
+        self.drawTimeBoxes(qp)
             
+    def setBitMapForShiftingReg(self,bitMapId, bit):
+        self.bitMapSReg[bitMapId][bit] = 1;
 
+    def resetBitMapForShiftingReg(self,bitMapId,bit):
+        self.bitMapSReg[bitMapId][bit] = 0;
         
-    def drawText(self, event, qp):
-        offset = 3;
+    def printBitMapForShiftingReg(self):
+        if self.debug:
+            print(" ### Mask For Shifting Registers ###")
+            for x in self.bitMapSReg:
+                print(x)
+            print(" \n")
+
+    def setLetterBitValues(self, event, qp):
+        offset  = 3;
         offsety = 3;
-        self.layout.updateTime()
-        for i in range(len(self.layout.letterField)):
+        self.timeHandler.updateTime()
+        for i in range(len(self.timeHandler.letterField)):
             offsety +=10;
             offset = 3;
-            for j in range(len(self.layout.letterField[i])):
+            for j in range(len(self.timeHandler.letterField[i])):
                 #Here we would set the shift registers!!!!!
                 #and illuminate the output
                 offset += 10; 
-                if(self.layout.setActiveByIndex(i,j)):
+                self.resetBitMapForShiftingReg(i,j)
+                if(self.timeHandler.setActiveByIndex(i,j)):
                     qp.setPen(Qt.white)
+                    self.setBitMapForShiftingReg(i,j)
                 else:
                     qp.setPen(Qt.darkGray)
                 qp.setFont(QFont('Decorative', 10))
-                qp.drawText(5+offset ,10+offsety, 20+offset, 30+offsety, Qt.AlignCenter, self.layout.letterField[i][j])        
-
+                qp.drawText(5+offset ,10+offsety, 20+offset, 30+offsety, Qt.AlignCenter, self.timeHandler.letterField[i][j])        
+        self.printBitMapForShiftingReg()
 
     def update(self):
         self.repaint()
