@@ -20,7 +20,11 @@ class wordqlockLayout(wordqlockTimeHandler):
         self.letterField.append(["Z","E","H","N","E","U","N","K","U","H","R"])
         
         self.staticIndices = [(0,0),(0,1),(0,3),(0,4),(0,5)];
+        self.oclockIndices = [(9,8),(9,9),(9,10)];
         
+        #The first  triple element is soley for debugging and printing purpose
+        #The second triple element is denoting the discretizied minute position where we wanna have transitions
+        #The third  triple element is giving tuples of active coordinates 
         self.minutecfgs = [ ['VOLL     '       ,0 ,[(9,8),(9,9),(9,10)]],
                             ['FUENFNACH'       ,5 ,[(0,7),(0,8),(0,9),(0,10),(3,7),(3,8),(3,9),(3,10)]],
                             ['ZEHNNACH'        ,10,[(1,0),(1,1),(1,2),(1,3),(3,7),(3,8),(3,9),(3,10)]],
@@ -34,7 +38,11 @@ class wordqlockLayout(wordqlockTimeHandler):
                             ['ZEHNVOR'         ,50,[(1,0),(1,1),(1,2),(1,3),(3,0),(3,1),(3,2)]],
                             ['FUENFVOR'        ,55,[(3,0),(3,1),(3,2),(0,7),(0,8),(0,9),(0,10)]],
                             ['VOLL    '        ,60,[(9,8),(9,9),(9,10)]]]
-                            
+                     
+        #The first  triple element is soley for debugging purpose
+        #the second triple elmenet is denoting the hour in (am,pm)-style
+        #  --> 0-23 hours style % 12 is resulting in this
+        #the third  triple element is giving tuples of active coordinates
         self.hourcfgs   = [ ['ZWOLF     '       ,0 ,[(8,6),(8,7),(8,8),(8,9),(8,10)]],
                             ['EINS'             ,1 ,[(5,0),(5,1),(5,2),(5,3)]],
                             ['ZWEI'             ,2,[(5,7),(5,8),(5,9),(5,10)]],

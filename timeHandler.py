@@ -47,38 +47,33 @@ class wordqlockTimeHandler():
         offset = 0;
         for i in range(len(self.minutecfgs) - 1 ):
             if self.currentTime.minute >= self.minutecfgs[i][1] and self.currentTime.minute < self.minutecfgs[i+1][1]:
-                   
-                #print("INDEX" + str(i) + self.minutecfgs[i][0]);
                 offset = self.currentTime.minute - self.minutecfgs[i][1];
-        #print(offset)
         return [x for x in range(offset)]
 
     def getCurrentSecondOffset(self):
         self.updateTime()
         return self.currentTime.second
 
+    def getActiveByTable(self,table,row,col,pred):
+        uRet = 0;
+        if pred:
+            for (i,j) in table:
+                if i == row and j == col:
+                    uRet = 1;
+        return uRet;
+        
     def setActiveByIndex(self,row,col):
         
         bRet = False;
-        for (i,j) in self.staticIndices:
-            if i == row and j == col:
-                #print(self.currentTime)
-                bRet = True;
-        #todo check for special cases
-        for (m,n) in self.getCurrentMinuteCfg():
-             if m == row and n == col:
-                #print(self.currentTime)
-                bRet = True;
-                
-        for (p,q) in self.getCurrentHourCfg():
-             if p == row and q == col:
-                #print(self.currentTime)
-                bRet = True;
-        
-        if self.currentTime.minute < 5:
-            #print UHR
-            if row == 9 and col in [8,9,10]:
-                bRet = True;
+        uRet = 0;
+        uRet = uRet + self.getActiveByTable(self.staticIndices        ,row,col,True);
+        uRet = uRet + self.getActiveByTable(self.getCurrentMinuteCfg(),row,col,True);
+        uRet = uRet + self.getActiveByTable(self.getCurrentHourCfg()  ,row,col,True);
+        uRet = uRet + self.getActiveByTable(self.oclockIndices        ,row,col,(self.currentTime.minute < 5));
+
+        if uRet > 0:
+            bRet = True;
+            
         return bRet;
 
         
