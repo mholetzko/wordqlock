@@ -2,13 +2,6 @@
 # -*- coding: utf-8 -*-
 
 """
-ZetCode PyQt5 tutorial 
-
-In this example, we draw text in Russian azbuka.
-
-author: Jan Bodnar
-website: zetcode.com 
-last edited: September 2015
 """
 
 import sys
