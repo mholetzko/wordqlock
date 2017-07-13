@@ -8,4 +8,8 @@ The idea is, that one are able to incrementally go forward and stub/mock the Har
 and that therefore development may be speeded up for those who are interested in
 creating their own wordqlock.
 
+By the way, there is a compiled version for mac. 
+
+/dist/visu/ --> ./visu 
+
 Cheers Mat.
