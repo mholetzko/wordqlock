@@ -13,7 +13,7 @@ class wordqlockTimeHandler():
         self.currentTime = t.datetime.now();
 
     def getTableTime(self,hour):
-        if self.currentTime.minute >= 30:
+        if self.currentTime.minute >= 25:
             if hour < 24:
                 lochour = hour + 1
             else:
