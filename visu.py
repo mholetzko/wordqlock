@@ -31,7 +31,6 @@ class WordqlockVisu(QMainWindow):
         self.timer.start();
 
     def paintEvent(self, event):
-        #print("PAINT EVENT")
         qp = QPainter()
         qp.begin(self)
         self.drawText(event, qp)
@@ -61,6 +60,8 @@ class WordqlockVisu(QMainWindow):
             offsety +=10;
             offset = 3;
             for j in range(len(self.layout.letterField[i])):
+                #Here we would set the shift registers!!!!!
+                #and illuminate the output
                 offset += 10; 
                 if(self.layout.setActiveByIndex(i,j)):
                     qp.setPen(Qt.white)
@@ -68,15 +69,11 @@ class WordqlockVisu(QMainWindow):
                     qp.setPen(Qt.darkGray)
                 qp.setFont(QFont('Decorative', 10))
                 qp.drawText(5+offset ,10+offsety, 20+offset, 30+offsety, Qt.AlignCenter, self.layout.letterField[i][j])        
-        #print(self.layout.letterField);
-        #print(len(self.layout.letterField)); 
+
 
     def update(self):
-        #print(" ############################### Here")
-        #print(" ******************************* Here")
         self.repaint()
 
-        
 if __name__ == '__main__':
     
     app = QApplication(sys.argv)
