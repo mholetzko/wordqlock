@@ -5,7 +5,7 @@ class wordqlockLayout():
     def __init__(self):
         
         self.letterField = [];
-        self.letterField.append(["E","S","K","I","S","T","A","F","U","N","F"])
+        self.letterField.append(["E","S","K","I","S","T","A","F","Ü","N","F"])
         self.letterField.append(["Z","E","H","N","Z","W","A","N","Z","I","G"])
         self.letterField.append(["D","R","E","I","V","I","E","R","T","E","L"])
         self.letterField.append(["V","O","R","F","U","N","K","N","A","C","H"])
@@ -13,7 +13,7 @@ class wordqlockLayout():
         self.letterField.append(["E","I","N","S","X","A","M","Z","W","E","I"])
         self.letterField.append(["D","R","E","I","P","M","J","V","I","E","R"])
         self.letterField.append(["S","E","C","H","S","B","L","A","C","H","T"])
-        self.letterField.append(["S","I","E","B","E","N","Z","W","O","L","F"])
+        self.letterField.append(["S","I","E","B","E","N","Z","W","Ö","L","F"])
         self.letterField.append(["Z","E","H","N","E","U","N","K","U","H","R"])
         
         self.staticIndices = [(0,0),(0,1),(0,3),(0,4),(0,5)];
