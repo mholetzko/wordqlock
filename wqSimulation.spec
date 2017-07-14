@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['wqSimulation.py'],
-             pathex=['/Users/matthiasholetzko/Documents/dev/wordqlock/wordqlock'],
+             pathex=['/Users/matthiasholetzko/Documents/dev/w/wordqlock'],
              binaries=[],
              datas=[],
              hiddenimports=[],

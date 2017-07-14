@@ -6,7 +6,7 @@
 
 import sys
 from PyQt5.QtWidgets      import QApplication,QMainWindow
-from PyQt5.QtGui          import QPainter, QColor, QFont
+from PyQt5.QtGui          import QPainter, QColor, QFont,QIcon
 from PyQt5.QtCore         import Qt, QTimer
 
 from wqTime2LayoutWrapper import WqTime2LayoutHandler
@@ -28,7 +28,7 @@ class WordqlockVisu(QMainWindow):
         self.timeHandler = WqTime2LayoutHandler();
         self.setStyleSheet("background-color: black")
         self.setGeometry(100, 100, 220, 250)
-        self.setWindowTitle('WordQlocktimeHandler')  
+        self.setWindowTitle('WordQlocktimeHandler')
         self.timer.timeout.connect(self.update)
         self.timer.start();
 
@@ -97,6 +97,7 @@ class WordqlockVisu(QMainWindow):
 if __name__ == '__main__':
     
     app = QApplication(sys.argv)
+    app.setWindowIcon(QIcon('icon.png'))
     ex = WordqlockVisu()
     ex.show()
     sys.exit(app.exec_())
