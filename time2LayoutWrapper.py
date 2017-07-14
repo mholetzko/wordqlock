@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from layout import wordqlockLayout
+from layout import WqLayout
 import datetime as t
 
-class wordqlockTimeHandler(wordqlockLayout):
+class WqTimeHandler(WqLayout):
     
     def __init__(self):
         
