@@ -65,6 +65,12 @@ class WqTimeHandler(WqLayout):
     def getCurrentSecondOffset(self):
         
         return self.currentTime.second
+        
+        
+class WqTime2LayoutHandler(WqTimeHandler):
+    
+    def __init__(self):
+        super().__init__()
 
     def getActiveByTable(self,table,row,col,pred):
         uRet = 0;
