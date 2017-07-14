@@ -73,10 +73,11 @@ class WordqlockVisu(QMainWindow):
         offset  = 3;
         offsety = 3;
         self.timeHandler.updateTime()
-        for i in range(len(self.timeHandler.letterField)):
+        
+        for i in range(self.timeHandler.getLetterFieldRowSize()):
             offsety +=10;
             offset = 3;
-            for j in range(len(self.timeHandler.letterField[i])):
+            for j in range(self.timeHandler.getLetterFieldColSize(i)):
                 #Here we would set the shift registers!!!!!
                 #and illuminate the output
                 offset += 10; 

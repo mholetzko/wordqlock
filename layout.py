@@ -75,3 +75,9 @@ class wordqlockLayout():
         
     def getpmIndices(self):
         return self.pmIndices;
+        
+    def getLetterFieldRowSize(self):
+        return len(self.letterField)
+
+    def getLetterFieldColSize(self,i):
+        return len(self.letterField[i])
