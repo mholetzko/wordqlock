@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['visu.py'],
+a = Analysis(['wqSimulation.py'],
              pathex=['/Users/matthiasholetzko/Documents/dev/wordqlock/wordqlock'],
              binaries=[],
              datas=[],
@@ -19,7 +19,7 @@ pyz = PYZ(a.pure, a.zipped_data,
 exe = EXE(pyz,
           a.scripts,
           exclude_binaries=True,
-          name='visu',
+          name='wqSimulation',
           debug=False,
           strip=False,
           upx=True,
@@ -30,4 +30,4 @@ coll = COLLECT(exe,
                a.datas,
                strip=False,
                upx=True,
-               name='visu')
+               name='wqSimulation')

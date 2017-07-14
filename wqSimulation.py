@@ -5,11 +5,11 @@
 """
 
 import sys
-from PyQt5.QtWidgets    import QApplication,QMainWindow
-from PyQt5.QtGui        import QPainter, QColor, QFont
-from PyQt5.QtCore       import Qt, QTimer
+from PyQt5.QtWidgets      import QApplication,QMainWindow
+from PyQt5.QtGui          import QPainter, QColor, QFont
+from PyQt5.QtCore         import Qt, QTimer
 
-from time2LayoutWrapper import WqTimeHandler
+from wqTime2LayoutWrapper import WqTimeHandler
 
 class WordqlockVisu(QMainWindow):
     

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from layout import WqLayout
+from wqLayout import WqLayout
 import datetime as t
 
 class WqTimeHandler(WqLayout):
