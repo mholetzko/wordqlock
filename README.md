@@ -10,7 +10,7 @@ creating their own wordqlock.
 
 By the way, there is a compiled version for mac. 
 
-/dist/visu/ --> ./visu 
+/dist/wqSimulation/ --> ./wqSimlutation 
 
 Cheers Mat.
 
