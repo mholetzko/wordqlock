@@ -20,6 +20,7 @@ class wqTargetApp(SampleBase):
         self.debug = True
         self.period = updatePeriod
         self.init = False
+        self.process()
         self.offset_canvas = self.matrix.CreateFrameCanvas()
 
 
@@ -64,4 +65,9 @@ if __name__ == '__main__':
     app = wqTargetApp(1)
     
     while True:
-        app.run()
+        try:
+            # Start loop
+            app.run()
+        except KeyboardInterrupt:
+            print("Exiting\n")
+            sys.exit(0)
