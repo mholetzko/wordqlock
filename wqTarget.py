@@ -33,10 +33,12 @@ class wqTargetApp(SampleBase):
     def printBitMapForShiftingReg(self):
         if self.debug:
             print(" ### Mask For Shifting Registers ###")
+            rowIdx = 0
             for row in self.bitMapSReg:
                 print(row)
                 for pixel in row:
-                    self.offset_canvas.setPixel(row,pixel,127,127)
+                    self.offset_canvas.SetPixel(rowIdx,pixel,127,127,127)
+                rowIdx = rowIdx + 1
             print(" \n")
 
     def setLetterBitValues(self):
