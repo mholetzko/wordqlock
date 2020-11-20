@@ -6,13 +6,12 @@ import sys
 #rgb matrix modules
 try:
     from samplebase import SampleBase
-    from rgbmatrix import graphics
 except:
     print("install libraries")
 
 from wqTime2LayoutWrapper import WqTime2LayoutHandler
 
-class wqTargetApp():
+class wqTargetApp(SampleBase):
 
     def __init__(self,updatePeriod):
         self.timeHandler = WqTime2LayoutHandler()
@@ -20,11 +19,9 @@ class wqTargetApp():
         self.debug = True
         self.period = updatePeriod
         self.init = False
+        self.offset_canvas = self.matrix.CreateFrameCanvas()
 
-    def runApp(self):
 
-       pass
-                
     def setBitMapForShiftingReg(self,bitMapId, bit):
         self.bitMapSReg[bitMapId][bit] = 1
 
@@ -34,8 +31,10 @@ class wqTargetApp():
     def printBitMapForShiftingReg(self):
         if self.debug:
             print(" ### Mask For Shifting Registers ###")
-            for x in self.bitMapSReg:
-                print(x)
+            for row in self.bitMapSReg:
+                print(row)
+                for pixel in row:
+                    self.offset_canvas.setPixel(row,pixel,127,127)
             print(" \n")
 
     def setLetterBitValues(self):
