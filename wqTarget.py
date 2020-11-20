@@ -12,8 +12,9 @@ except:
 from wqTime2LayoutWrapper import WqTime2LayoutHandler
 
 class wqTargetApp(SampleBase):
-
-    def __init__(self,updatePeriod):
+        
+    def __init__(self,updatePeriod,*args, **kwargs):
+        super(wqTargetApp, self).__init__(*args, **kwargs)
         self.timeHandler = WqTime2LayoutHandler()
         self.bitMapSReg = [[x for x in range(11)] for x in range(10)]
         self.debug = True
