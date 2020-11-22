@@ -39,7 +39,10 @@ class wqTargetApp(SampleBase):
                 for pixel in row:
                     self.offset_canvas.SetPixel(rowIdx,pixel,127,127,127)
                 rowIdx = rowIdx + 1
+            self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
+
             print(" \n")
+
 
     def setLetterBitValues(self):
         self.timeHandler.updateTime()
