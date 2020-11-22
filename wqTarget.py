@@ -39,7 +39,8 @@ class wqTargetApp(SampleBase):
                 pixlIdx = 0
                 for pixel in row:
                     if pixel != 0:
-                        self.offset_canvas.SetPixel(pixlIdx,rowIdx,127,127,127)
+                        self.offset_canvas.SetPixel(1+2*pixlIdx ,rowIdx,127,127,127)
+                        self.offset_canvas.SetPixel(2+2*pixlIdx,rowIdx,127,127,127)
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
             self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
