@@ -34,10 +34,10 @@ class wqTargetApp(SampleBase):
         if self.debug:
             print(" ### Mask For Shifting Registers ###")
             rowIdx = 0
+            offset = 0
             for row in self.bitMapSReg:
                 print(row)
                 pixlIdx = 0
-                offset = 0
                 for pixel in row:
                     if pixel != 0:
                         self.offset_canvas.SetPixel(1+2*pixlIdx+offset,rowIdx,127,127,127)
