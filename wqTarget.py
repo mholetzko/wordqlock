@@ -48,8 +48,8 @@ class wqTargetApp(SampleBase):
                         draw.rectangle((2*pixlIdx+pixlIdx, 2*pixlIdx+pixlIdx+1, *rowIdx+rowIdx, 2*rowIdx+rowIdx+1), fill=(self.intensity,self.intensity,self.intensity), outline=(self.intensity,self.intensity,self.intensity))
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
-            #self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
             self.matrix.SetImage(image)
+            self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
             print(" \n")
 
 
