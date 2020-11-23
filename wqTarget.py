@@ -56,7 +56,7 @@ class wqTargetApp(SampleBase):
                 self.resetBitMapForShiftingReg(i,j)
                 if(self.timeHandler.setActiveByIndex(i,j)):
                     self.setBitMapForShiftingReg(i,j) 
-        if self.oldbitMap != self.bitMapSReg:
+        if self.oldbitMap == self.bitMapSReg:
             self.printBitMapForShiftingReg()
        
 
