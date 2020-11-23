@@ -17,6 +17,7 @@ class wqTargetApp(SampleBase):
         super(wqTargetApp, self).__init__(*args, **kwargs)
         self.timeHandler = WqTime2LayoutHandler()
         self.bitMapSReg = [[x for x in range(11)] for x in range(10)]
+        self.oldbitMap = [[x for x in range(11)] for x in range(10)]
         self.debug = True
         self.period = updatePeriod
         self.init = False
@@ -48,14 +49,15 @@ class wqTargetApp(SampleBase):
 
     def setLetterBitValues(self):
         self.timeHandler.updateTime()
-        
+        self.oldbitMap = self.bitMapSReg
         for i in range(self.timeHandler.getLetterFieldRowSize()):
             for j in range(self.timeHandler.getLetterFieldColSize(i)):
                 #Here we would set the shift registers!!!!!
                 self.resetBitMapForShiftingReg(i,j)
                 if(self.timeHandler.setActiveByIndex(i,j)):
-                    self.setBitMapForShiftingReg(i,j)       
-        self.printBitMapForShiftingReg()
+                    self.setBitMapForShiftingReg(i,j) 
+        if self.oldbitMap != self.bitMapSReg:
+            self.printBitMapForShiftingReg()
        
 
     def run(self):
