@@ -46,7 +46,7 @@ class wqTargetApp(SampleBase):
                         self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx,      2*rowIdx+rowIdx+1,self.intensity,self.intensity,self.intensity)
                         self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx+1,    2*rowIdx+rowIdx+1,self.intensity,self.intensity,self.intensity)
                     else:
-                        if pixelIdx > 0 and rowIdx > 0:
+                        if pixlIdx > 0 and rowIdx > 0:
                             self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx-1,      2*rowIdx+rowIdx-1,0,0,0)
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
