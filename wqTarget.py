@@ -35,6 +35,8 @@ class wqTargetApp(SampleBase):
             
     def printBitMapForShiftingReg(self):
         if self.debug:
+            image = Image.new("RGB", (32, 32))  # Can be larger than matrix if wanted!!
+            draw = ImageDraw.Draw(image)  # Declare Draw instance before prims
             self.matrix.Clear()
             print(" ### Mask For Shifting Registers ###")
             rowIdx = 0
@@ -43,14 +45,11 @@ class wqTargetApp(SampleBase):
                 pixlIdx = 0
                 for pixel in row:
                     if pixel != 0:
-                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx,      2*rowIdx+rowIdx,self.intensity,self.intensity,self.intensity)
-                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx+1,    2*rowIdx+rowIdx,self.intensity,self.intensity,self.intensity)
-                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx,      2*rowIdx+rowIdx+1,self.intensity,self.intensity,self.intensity)
-                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx+1,    2*rowIdx+rowIdx+1,self.intensity,self.intensity,self.intensity)
+                        draw.rectangle((2*pixlIdx+pixlIdx, 2*pixlIdx+pixlIdx+1, *rowIdx+rowIdx, 2*rowIdx+rowIdx+1), fill=(self.intensity,self.intensity,self.intensity), outline=(self.intensity,self.intensity,self.intensity))
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
-            self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
-
+            #self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
+            self.matrix.SetImage(image)
             print(" \n")
 
 
