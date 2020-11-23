@@ -1,36 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@mholetzko 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
-
-
-mholetzko
-/
-wordqlock
-1
-00
-Code
-Pull requests
-Actions
-Projects
-Security
-Insights
-Settings
-wordqlock/wqTarget.py /
-@mholetzko
-mholetzko better moving to old approach
-Latest commit 883bb01 40 minutes ago
- History
- 1 contributor
-86 lines (69 sloc)  2.96 KB
-  
 #!/usr/bin/env python
 #common
 import time
@@ -117,15 +84,4 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             print("Exiting\n")
             sys.exit(0)
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+
