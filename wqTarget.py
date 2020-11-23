@@ -32,7 +32,6 @@ class wqTargetApp(SampleBase):
             
     def printBitMapForShiftingReg(self):
         if self.debug:
-            self.matrix.Clear()
             rowIdx = 0
             for row in self.bitMapSReg:
                 pixlIdx = 0
@@ -44,6 +43,7 @@ class wqTargetApp(SampleBase):
                         self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx+1,    2*rowIdx+rowIdx+1,self.intensity,self.intensity,self.intensity)
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
+            self.matrix.Clear()
             self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
 
     def setLetterBitValues(self):
@@ -60,7 +60,7 @@ class wqTargetApp(SampleBase):
 
     def run(self):
         self.setLetterBitValues()
-        time.sleep(0.08)
+        time.sleep(0.2)
 
 
 if __name__ == '__main__':
