@@ -6,6 +6,8 @@ import sys
 #rgb matrix modules
 try:
     from samplebase import SampleBase
+    from PIL import Image
+    from PIL import ImageDraw
 except:
     print("install libraries")
 
