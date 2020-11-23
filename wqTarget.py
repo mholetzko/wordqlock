@@ -60,7 +60,6 @@ class wqTargetApp(SampleBase):
 
     def run(self):
         self.setLetterBitValues()
-        time.sleep(0.01)
 
 
 if __name__ == '__main__':
