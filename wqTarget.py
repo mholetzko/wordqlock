@@ -21,11 +21,9 @@ class wqTargetApp(SampleBase):
         self.period = updatePeriod
         self.init = False
         self.intensity = 50
+        sys.argv.append("-p 1")
         self.process()
         self.offset_canvas = self.matrix.CreateFrameCanvas()
-        self.options.pwm_bits = 5
-        self.options.pwm_lsb_nanoseconds = 70
-
 
     def setBitMapForShiftingReg(self,bitMapId, bit):
         self.bitMapSReg[bitMapId][bit] = 1
