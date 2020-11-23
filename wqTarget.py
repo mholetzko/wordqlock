@@ -32,6 +32,7 @@ class wqTargetApp(SampleBase):
             
     def printBitMapForShiftingReg(self):
         if self.debug:
+            self.matrix.Clear()
             print(" ### Mask For Shifting Registers ###")
             rowIdx = 0
             for row in self.bitMapSReg:
