@@ -44,7 +44,9 @@ class wqTargetApp(SampleBase):
                 pixlIdx = 0
                 for pixel in row:
                     if pixel != 0:
-                        draw.rectangle((2*pixlIdx+pixlIdx, 2*pixlIdx+pixlIdx+1, *rowIdx+rowIdx, 2*rowIdx+rowIdx+1), fill=(self.intensity,self.intensity,self.intensity), outline=(self.intensity,self.intensity,self.intensity))
+                        draw.rectangle((2*pixlIdx+pixlIdx, 2*pixlIdx+pixlIdx+1, 2*rowIdx+rowIdx, 2*rowIdx+rowIdx+1), fill=(self.intensity,self.intensity,self.intensity), outline=(self.intensity,self.intensity,self.intensity))
+                    else:
+                        draw.rectangle((pixlIdx, pixlIdx, rowIdx, rowIdx), fill=(0,0,0), outline=(0,0,0))
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
             self.matrix.SetImage(image)
