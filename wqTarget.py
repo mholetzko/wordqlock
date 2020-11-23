@@ -24,6 +24,7 @@ class wqTargetApp(SampleBase):
         self.init = False
         self.intensity = 50
         self.process()
+        self.options.pwm_bits = 1
         self.offset_canvas = self.matrix.CreateFrameCanvas()
 
 
