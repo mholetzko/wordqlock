@@ -20,7 +20,7 @@ class wqTargetApp(SampleBase):
         self.debug = True
         self.period = updatePeriod
         self.init = False
-        self.intensity = 200
+        self.intensity = 250
         self.process()
         self.offset_canvas = self.matrix.CreateFrameCanvas()
 
@@ -60,6 +60,7 @@ class wqTargetApp(SampleBase):
 
     def run(self):
         self.setLetterBitValues()
+        time.sleep(0.001)
 
 
 if __name__ == '__main__':
