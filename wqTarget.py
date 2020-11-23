@@ -67,12 +67,8 @@ class wqTargetApp(SampleBase):
        
 
     def run(self):
-        if self.init and self.timeHandler.getTimeSinceLastUpdate() < t.timedelta(minutes=self.period):
-            #print(" ### Wait for "+str(self.period)+" minutes ###")
-            time.sleep(self.period)
-        else:
-            self.init = True
-            self.setLetterBitValues()
+        self.setLetterBitValues()
+        time.sleep(0.01)
 
 
 if __name__ == '__main__':
