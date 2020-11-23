@@ -1,3 +1,36 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@mholetzko 
+Learn Git and GitHub without any code!
+Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+
+
+mholetzko
+/
+wordqlock
+1
+00
+Code
+Pull requests
+Actions
+Projects
+Security
+Insights
+Settings
+wordqlock/wqTarget.py /
+@mholetzko
+mholetzko better moving to old approach
+Latest commit 883bb01 40 minutes ago
+ History
+ 1 contributor
+86 lines (69 sloc)  2.96 KB
+  
 #!/usr/bin/env python
 #common
 import time
@@ -6,8 +39,6 @@ import sys
 #rgb matrix modules
 try:
     from samplebase import SampleBase
-    from PIL import Image
-    from PIL import ImageDraw
 except:
     print("install libraries")
 
@@ -24,6 +55,7 @@ class wqTargetApp(SampleBase):
         self.init = False
         self.intensity = 50
         self.process()
+        self.offset_canvas = self.matrix.CreateFrameCanvas()
 
 
     def setBitMapForShiftingReg(self,bitMapId, bit):
@@ -34,8 +66,6 @@ class wqTargetApp(SampleBase):
             
     def printBitMapForShiftingReg(self):
         if self.debug:
-            image = Image.new("RGB", (32, 32))  # Can be larger than matrix if wanted!!
-            draw = ImageDraw.Draw(image)  # Declare Draw instance before prims
             self.matrix.Clear()
             print(" ### Mask For Shifting Registers ###")
             rowIdx = 0
@@ -44,10 +74,14 @@ class wqTargetApp(SampleBase):
                 pixlIdx = 0
                 for pixel in row:
                     if pixel != 0:
-                        draw.rectangle((2*pixlIdx+pixlIdx, 2*pixlIdx+pixlIdx+1, 2*rowIdx+rowIdx, 2*rowIdx+rowIdx+1), fill=(self.intensity,self.intensity,self.intensity), outline=(self.intensity,self.intensity,self.intensity))
+                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx,      2*rowIdx+rowIdx,self.intensity,self.intensity,self.intensity)
+                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx+1,    2*rowIdx+rowIdx,self.intensity,self.intensity,self.intensity)
+                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx,      2*rowIdx+rowIdx+1,self.intensity,self.intensity,self.intensity)
+                        self.offset_canvas.SetPixel(2*pixlIdx+pixlIdx+1,    2*rowIdx+rowIdx+1,self.intensity,self.intensity,self.intensity)
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
-            self.matrix.SetImage(image)
+            self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
+
             print(" \n")
 
 
@@ -83,3 +117,15 @@ if __name__ == '__main__':
         except KeyboardInterrupt:
             print("Exiting\n")
             sys.exit(0)
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
