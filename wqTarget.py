@@ -21,7 +21,6 @@ class wqTargetApp(SampleBase):
         self.period = updatePeriod
         self.init = False
         self.intensity = 50
-        sys.argv.append("-p 1")
         self.process()
         self.offset_canvas = self.matrix.CreateFrameCanvas()
 
