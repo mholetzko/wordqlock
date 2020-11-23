@@ -25,7 +25,6 @@ class wqTargetApp(SampleBase):
         self.intensity = 50
         self.process()
         self.options.pwm_bits = 1
-        self.offset_canvas = self.matrix.CreateFrameCanvas()
 
 
     def setBitMapForShiftingReg(self,bitMapId, bit):
@@ -50,7 +49,6 @@ class wqTargetApp(SampleBase):
                     pixlIdx = pixlIdx + 1
                 rowIdx = rowIdx + 1
             self.matrix.SetImage(image)
-            self.offset_canvas = self.matrix.SwapOnVSync(self.offset_canvas)
             print(" \n")
 
 
