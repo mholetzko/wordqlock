@@ -20,7 +20,7 @@ class wqTargetApp(SampleBase):
         self.debug = True
         self.period = updatePeriod
         self.init = False
-        self.intensity = 70
+        self.intensity = 50
         self.process()
         self.offset_canvas = self.matrix.CreateFrameCanvas()
 
@@ -65,13 +65,12 @@ class wqTargetApp(SampleBase):
        
 
     def run(self):
-        #if self.init and self.timeHandler.getTimeSinceLastUpdate() < t.timedelta(minutes=self.period):
-        #    print(" ### Wait for "+str(self.period)+" minutes ###")
-        #    time.sleep(self.period*100)
-        #else:
-        #    self.init = True
-        #    self.setLetterBitValues()
-        self.setLetterBitValues()
+        if self.init and self.timeHandler.getTimeSinceLastUpdate() < t.timedelta(minutes=self.period):
+            print(" ### Wait for "+str(self.period)+" minutes ###")
+            time.sleep(self.period*100)
+        else:
+            self.init = True
+            self.setLetterBitValues()
 
 
 if __name__ == '__main__':
