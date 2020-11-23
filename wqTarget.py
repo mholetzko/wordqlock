@@ -20,7 +20,7 @@ class wqTargetApp(SampleBase):
         self.debug = True
         self.period = updatePeriod
         self.init = False
-        self.intensity = 100
+        self.intensity = 70
         self.process()
         self.offset_canvas = self.matrix.CreateFrameCanvas()
 
