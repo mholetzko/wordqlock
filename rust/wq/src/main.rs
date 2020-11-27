@@ -66,22 +66,22 @@ impl TimeLayout {
                          //UHR
             clock_indices  :[(9,8),(9,9),(9,10),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99)],
                          //AM
-            am_indices     : [(5,5),(6,5),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99)],
+            am_indices     : [(5,5),(5,6),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99)],
                          //PM
             pm_indices     : [(6,4),(6,5),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99),(99,99)],
 
-            letter_field   : [  ["E".to_string(),"S".to_string(),"K".to_string(),"I".to_string(),"S".to_string(),"T".to_string(),"A".to_string(),"F".to_string(),"Ü".to_string(),"N".to_string(),"F".to_string()],
-                                ["Z".to_string(),"E".to_string(),"H".to_string(),"N".to_string(),"Z".to_string(),"W".to_string(),"A".to_string(),"N".to_string(),"Z".to_string(),"I".to_string(),"G".to_string()],
-                                ["D".to_string(),"R".to_string(),"E".to_string(),"I".to_string(),"V".to_string(),"I".to_string(),"E".to_string(),"R".to_string(),"T".to_string(),"E".to_string(),"L".to_string()],
-                                ["V".to_string(),"O".to_string(),"R".to_string(),"F".to_string(),"U".to_string(),"N".to_string(),"K".to_string(),"N".to_string(),"A".to_string(),"C".to_string(),"H".to_string()],
-                                ["H".to_string(),"A".to_string(),"L".to_string(),"B".to_string(),"A".to_string(),"E".to_string(),"L".to_string(),"F".to_string(),"U".to_string(),"N".to_string(),"F".to_string()],
-                                ["E".to_string(),"I".to_string(),"N".to_string(),"S".to_string(),"X".to_string(),"A".to_string(),"M".to_string(),"Z".to_string(),"W".to_string(),"E".to_string(),"I".to_string()],
-                                ["D".to_string(),"R".to_string(),"E".to_string(),"I".to_string(),"P".to_string(),"M".to_string(),"J".to_string(),"V".to_string(),"I".to_string(),"E".to_string(),"R".to_string()],
-                                ["S".to_string(),"E".to_string(),"C".to_string(),"H".to_string(),"S".to_string(),"B".to_string(),"L".to_string(),"A".to_string(),"C".to_string(),"H".to_string(),"T".to_string()],
-                                ["S".to_string(),"I".to_string(),"E".to_string(),"B".to_string(),"E".to_string(),"N".to_string(),"Z".to_string(),"W".to_string(),"Ö".to_string(),"L".to_string(),"F".to_string()],
-                                ["Z".to_string(),"E".to_string(),"H".to_string(),"N".to_string(),"E".to_string(),"U".to_string(),"N".to_string(),"K".to_string(),"U".to_string(),"H".to_string(),"R".to_string()]],
+            letter_field   : [  [" E ".to_string()," S ".to_string()," K ".to_string()," I ".to_string()," S ".to_string()," T ".to_string()," A ".to_string()," F ".to_string()," Ü ".to_string()," N ".to_string()," F ".to_string()],
+                                [" Z ".to_string()," E ".to_string()," H ".to_string()," N ".to_string()," Z ".to_string()," W ".to_string()," A ".to_string()," N ".to_string()," Z ".to_string()," I ".to_string()," G ".to_string()],
+                                [" D ".to_string()," R ".to_string()," E ".to_string()," I ".to_string()," V ".to_string()," I ".to_string()," E ".to_string()," R ".to_string()," T ".to_string()," E ".to_string()," L ".to_string()],
+                                [" V ".to_string()," O ".to_string()," R ".to_string()," F ".to_string()," U ".to_string()," N ".to_string()," K ".to_string()," N ".to_string()," A ".to_string()," C ".to_string()," H ".to_string()],
+                                [" H ".to_string()," A ".to_string()," L ".to_string()," B ".to_string()," A ".to_string()," E ".to_string()," L ".to_string()," F ".to_string()," U ".to_string()," N ".to_string()," F ".to_string()],
+                                [" E ".to_string()," I ".to_string()," N ".to_string()," S ".to_string()," X ".to_string()," A ".to_string()," M ".to_string()," Z ".to_string()," W ".to_string()," E ".to_string()," I ".to_string()],
+                                [" D ".to_string()," R ".to_string()," E ".to_string()," I ".to_string()," P ".to_string()," M ".to_string()," J ".to_string()," V ".to_string()," I ".to_string()," E ".to_string()," R ".to_string()],
+                                [" S ".to_string()," E ".to_string()," C ".to_string()," H ".to_string()," S ".to_string()," B ".to_string()," L ".to_string()," A ".to_string()," C ".to_string()," H ".to_string()," T ".to_string()],
+                                [" S ".to_string()," I ".to_string()," E ".to_string()," B ".to_string()," E ".to_string()," N ".to_string()," Z ".to_string()," W ".to_string()," Ö ".to_string()," L ".to_string()," F ".to_string()],
+                                [" Z ".to_string()," E ".to_string()," H ".to_string()," N ".to_string()," E ".to_string()," U ".to_string()," N ".to_string()," K ".to_string()," U ".to_string()," H ".to_string()," R ".to_string()]],
 
-            bit_map   :      [  [0,0,0,0,0,0,0,0,0,0,0],
+             bit_map   :      [  [0,0,0,0,0,0,0,0,0,0,0],
                                 [0,0,0,0,0,0,0,0,0,0,0],
                                 [0,0,0,0,0,0,0,0,0,0,0],
                                 [0,0,0,0,0,0,0,0,0,0,0],
@@ -167,26 +167,25 @@ impl TimeHandler {
         return self.time_layout.pm_indices;
     }    
 
-    fn analyse_active_table(&mut self,table:[(u8,u8);12],row:usize,col:usize,pred:bool) -> u8{
+    fn analyse_active_table(&mut self,table:[(u8,u8);12],row:usize,col:usize) -> u8{
         let mut u_ret = 0;
-        if pred {
-            for x in table.iter(){
-                if x.0 != 99 && x.1 != 99 {
-                    if usize::from(x.0) == row && usize::from(x.1) == col {
-                        u_ret += 1;
-                    }
-                } else {
-                    break;
+        for x in table.iter(){
+            if *x != (99,99) {
+                if usize::from(x.0) == row && usize::from(x.1) == col {
+                    u_ret += 1;
                 }
+            } else {
+                break;
             }
         }
+        
 
         return u_ret;
     }
 
 
 
-    fn get_active_by_table_id(&mut self,table:LookUpIndex,row:usize,col:usize,pred:bool) -> u8{
+    fn get_active_by_table_id(&mut self,table:LookUpIndex,row:usize,col:usize) -> u8{
         let u_ret;
         let current_table : [(u8,u8);12];
         match table {
@@ -209,41 +208,74 @@ impl TimeHandler {
                 current_table = self.get_current_hour_cfg();
             }
         }
-        u_ret = self.analyse_active_table(current_table,row,col,pred);
+        u_ret = self.analyse_active_table(current_table,row,col);
 
         return u_ret;
     }
 
+    fn print_letter_bit_map(&mut self)  {
+        for x in self.time_layout.bit_map.iter() {
+            println!{"{:?}",x};
+        }
+    }
+
+    fn print_letter_wq_layout(&mut self)  {
+
+        let mut row_idx = 0;
+        let mut col_idx;
+        for row_bm in self.time_layout.bit_map.iter() {
+            col_idx = 0;
+            let mut current_line = String::from("");
+            for bit in row_bm.iter() {
+                if *bit != 0 {
+                    current_line.push_str(&self.time_layout.letter_field[row_idx][col_idx]);
+                    
+                } else {
+                    current_line.push_str(" . ");
+                }
+                col_idx += 1;
+            }
+            println!("{:?}",current_line);
+            row_idx+=1;
+        }
+    }
+
     fn set_letter_bit_values(&mut self) {
         self.update_time();
-        let mut u_bit = 0;
+        let mut u_bit;
         
         for i in 0..self.time_layout.letter_field.len() {
            for j in 0..self.time_layout.letter_field[0].len() {
+
+               u_bit = 0;
                // reset bitmap
                self.time_layout.bit_map[i][j] = 0;
                // set active by lookup tables
                
                // set the static indices
-               u_bit += self.get_active_by_table_id(LookUpIndex::Static,i,j,true);
+               u_bit += self.get_active_by_table_id(LookUpIndex::Static,i,j);
                
-               // set oclock   
-               u_bit += self.get_active_by_table_id(LookUpIndex::Oclock,i,j,true);
+               if self.current_time.minute() < 5 {
+                   // set oclock   
+                   u_bit += self.get_active_by_table_id(LookUpIndex::Oclock,i,j);
+               }
 
-               // set am   
-               u_bit += self.get_active_by_table_id(LookUpIndex::Am,i,j,true);
-
-               //set pm
-               u_bit += self.get_active_by_table_id(LookUpIndex::Pm,i,j,true);
+               if self.current_time.hour() >= 12 {
+                   //set pm
+                   u_bit += self.get_active_by_table_id(LookUpIndex::Pm,i,j);
+               } else { 
+                   //set am
+                u_bit += self.get_active_by_table_id(LookUpIndex::Am,i,j);
+               }
                
                // set minute
-               u_bit += self.get_active_by_table_id(LookUpIndex::Minute,i,j,true);
+               u_bit += self.get_active_by_table_id(LookUpIndex::Minute,i,j);
                
                // set hour
-               u_bit += self.get_active_by_table_id(LookUpIndex::Hour,i,j,true);
+               u_bit += self.get_active_by_table_id(LookUpIndex::Hour,i,j);
 
                if u_bit > 0 {
-                    self.time_layout.bit_map[i][j] = 0;
+                    self.time_layout.bit_map[i][j] = 1;
                }
            }
         }
@@ -254,7 +286,7 @@ impl TimeHandler {
 fn main() {
     println!("wqSimulation entry point");
     
-    let now = Instant::now();
+    let mut now = Instant::now();
     let interval = 5;
 
     let mut time_handler = TimeHandler::new();
@@ -263,11 +295,16 @@ fn main() {
         //Read Time
         if now.elapsed().as_secs() > interval
         {
-            //Update cycles are 
+            //set bitmaps for current time
             time_handler.set_letter_bit_values();
-            //Update Time
-
-            //Set Bitmaps
+            //print the bitmap as "bits"
+            println!("###################################");
+            time_handler.print_letter_bit_map();
+            println!("###################################");
+            time_handler.print_letter_wq_layout();
+            println!("###################################");
+            //update the time for control again
+            now = Instant::now();
         }
 
     }
