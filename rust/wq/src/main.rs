@@ -295,9 +295,11 @@ fn main() {
         //Read Time
         if now.elapsed().as_secs() > interval
         {
+            let mut mp2 = Instant::now();
             //set bitmaps for current time
             time_handler.set_letter_bit_values();
             //print the bitmap as "bits"
+            println!("Step took : {:?}",mp2.elapsed().as_micros());
             println!("###################################");
             time_handler.print_letter_bit_map();
             println!("###################################");
