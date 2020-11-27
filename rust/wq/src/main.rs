@@ -305,7 +305,7 @@ fn main() {
             println!("###################################");
             time_handler.print_letter_wq_layout();
             println!("###################################");
-            println!("Step  took : {:?}",mp2.elapsed().as_micros());
+            println!("Step  took : {:?}",mp2.elapsed().as_micros()-mp3.elapsed().as_micros());
             println!("Print took : {:?}",mp3.elapsed().as_micros());
             //update the time for control again
             now = Instant::now();
