@@ -1,6 +1,7 @@
 
 use std::time::{Instant};
 use chrono::prelude::*;
+use rpi_led_matrix::{LedMatrix, LedColor};
 
 
 struct Time2IndexCfg {
@@ -290,6 +291,16 @@ fn main() {
     let interval = 5;
 
     let mut time_handler = TimeHandler::new();
+    let matrix = LedMatrix::new(None, None).unwrap();
+    let mut canvas = matrix.offscreen_canvas();
+    for red in 0..255 {
+        for green in 0..255 {
+            for blue in 0..255 {
+                canvas.fill(&LedColor { red, green, blue });
+                canvas = matrix.swap(canvas);
+            }
+        }
+    }
 
     loop {
         //Read Time
