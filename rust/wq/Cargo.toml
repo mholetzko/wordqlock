@@ -6,7 +6,11 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[build-dependencies]
+gcc = "0.3"
+
 [dependencies]
+libc = "0.2"
 chrono = "0.4"
 rpi-led-matrix = "0.2.2"
 
