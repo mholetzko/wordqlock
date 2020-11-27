@@ -9,6 +9,15 @@ struct Time2IndexCfg {
     sign_in_count: [(u8,u8);12]
 }
 
+enum LookUpIndex {
+    Static,
+    Oclock,
+    Am,
+    Pm,
+    Minute,
+    Hour
+}
+
 
 struct TimeLayout {
     min_cfg : [Time2IndexCfg;13],
@@ -17,7 +26,8 @@ struct TimeLayout {
     clock_indices : [(u8,u8);12],
     am_indices : [(u8,u8);12],
     pm_indices : [(u8,u8);12],
-    letter_field : [[std::string::String;11];10]
+    letter_field : [[std::string::String;11];10],
+    bit_map : [[u8;11];10]
 
 }
 
@@ -69,7 +79,18 @@ impl TimeLayout {
                                 ["D".to_string(),"R".to_string(),"E".to_string(),"I".to_string(),"P".to_string(),"M".to_string(),"J".to_string(),"V".to_string(),"I".to_string(),"E".to_string(),"R".to_string()],
                                 ["S".to_string(),"E".to_string(),"C".to_string(),"H".to_string(),"S".to_string(),"B".to_string(),"L".to_string(),"A".to_string(),"C".to_string(),"H".to_string(),"T".to_string()],
                                 ["S".to_string(),"I".to_string(),"E".to_string(),"B".to_string(),"E".to_string(),"N".to_string(),"Z".to_string(),"W".to_string(),"Ö".to_string(),"L".to_string(),"F".to_string()],
-                                ["Z".to_string(),"E".to_string(),"H".to_string(),"N".to_string(),"E".to_string(),"U".to_string(),"N".to_string(),"K".to_string(),"U".to_string(),"H".to_string(),"R".to_string()]]
+                                ["Z".to_string(),"E".to_string(),"H".to_string(),"N".to_string(),"E".to_string(),"U".to_string(),"N".to_string(),"K".to_string(),"U".to_string(),"H".to_string(),"R".to_string()]],
+
+            bit_map   :      [  [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0],
+                                [0,0,0,0,0,0,0,0,0,0,0]]
         }
     }
 }
@@ -93,7 +114,7 @@ impl TimeHandler {
     }
 
     fn get_table_time(&self) -> u32{
-        let mut lochour:u32 = 0;
+        let lochour:u32;
         let hour:u32 = self.current_time.hour();
 
         if self.current_time.minute() >= 25 {
@@ -109,7 +130,7 @@ impl TimeHandler {
         }
     }
 
-    fn get_current_min_cfg(self) -> [(u8,u8);12] {
+    fn get_current_min_cfg(&mut self) -> [(u8,u8);12] {
         
         let current_min = self.current_time.minute();
 
@@ -130,102 +151,120 @@ impl TimeHandler {
         return self.time_layout.hour_cfg[idx].sign_in_count;
     }
 
-    fn get_static_indices(self) -> [(u8,u8);12]{
+    fn get_static_indices(&mut self) -> [(u8,u8);12]{
         return self.time_layout.static_indices;
     }
 
-    fn get_oclock_indices(self) -> [(u8,u8);12] {
+    fn get_oclock_indices(&mut self) -> [(u8,u8);12] {
         return self.time_layout.clock_indices;
     }
 
-    fn get_am_indices(self) -> [(u8,u8);12] {
+    fn get_am_indices(&mut self) -> [(u8,u8);12] {
         return self.time_layout.am_indices;
-    }    
+    }   
     
-    fn get_pm_indices(self) -> [(u8,u8);12] {
+    fn get_pm_indices(&mut self) -> [(u8,u8);12] {
         return self.time_layout.pm_indices;
-        
+    }    
+
+    fn analyse_active_table(&mut self,table:[(u8,u8);12],row:usize,col:usize,pred:bool) -> u8{
+        let mut u_ret = 0;
+        if pred {
+            for x in table.iter(){
+                if x.0 != 99 && x.1 != 99 {
+                    if usize::from(x.0) == row && usize::from(x.1) == col {
+                        u_ret += 1;
+                    }
+                } else {
+                    break;
+                }
+            }
+        }
+
+        return u_ret;
+    }
+
+
+
+    fn get_active_by_table_id(&mut self,table:LookUpIndex,row:usize,col:usize,pred:bool) -> u8{
+        let u_ret;
+        let current_table : [(u8,u8);12];
+        match table {
+            LookUpIndex::Static => {
+                current_table = self.get_static_indices();
+            }            
+            LookUpIndex::Oclock => {
+                current_table = self.get_oclock_indices();
+            }           
+            LookUpIndex::Am => {
+                current_table = self.get_am_indices();
+            }
+            LookUpIndex::Pm => {
+                current_table = self.get_pm_indices();
+            }
+            LookUpIndex::Minute => {
+                current_table = self.get_current_min_cfg();
+            }
+            LookUpIndex::Hour => {
+                current_table = self.get_current_hour_cfg();
+            }
+        }
+        u_ret = self.analyse_active_table(current_table,row,col,pred);
+
+        return u_ret;
     }
 
     fn set_letter_bit_values(&mut self) {
         self.update_time();
-
+        let mut u_bit = 0;
+        
         for i in 0..self.time_layout.letter_field.len() {
            for j in 0..self.time_layout.letter_field[0].len() {
                // reset bitmap
+               self.time_layout.bit_map[i][j] = 0;
                // set active by lookup tables
-               // if active -> set bit 
+               
+               // set the static indices
+               u_bit += self.get_active_by_table_id(LookUpIndex::Static,i,j,true);
+               
+               // set oclock   
+               u_bit += self.get_active_by_table_id(LookUpIndex::Oclock,i,j,true);
+
+               // set am   
+               u_bit += self.get_active_by_table_id(LookUpIndex::Am,i,j,true);
+
+               //set pm
+               u_bit += self.get_active_by_table_id(LookUpIndex::Pm,i,j,true);
+               
+               // set minute
+               u_bit += self.get_active_by_table_id(LookUpIndex::Minute,i,j,true);
+               
+               // set hour
+               u_bit += self.get_active_by_table_id(LookUpIndex::Hour,i,j,true);
+
+               if u_bit > 0 {
+                    self.time_layout.bit_map[i][j] = 0;
+               }
            }
         }
     }
-
-
-
-
-    //def setLetterBitValues(self):
-    //    self.timeHandler.updateTime()
-    //    self.oldbitMap = self.bitMapSReg
-    //    for i in range(self.timeHandler.getLetterFieldRowSize()):
-    //        for j in range(self.timeHandler.getLetterFieldColSize(i)):
-    //            #Here we would set the shift registers!!!!!
-    //            self.resetBitMapForShiftingReg(i,j)
-    //            if(self.timeHandler.setActiveByIndex(i,j)):
-    //                self.setBitMapForShiftingReg(i,j) 
-    //    if self.oldbitMap != self.bitMapSReg:
-    //fn get_active_by_table_id(&self,table:[(u8,u8);12],row:u32,col:u32,pred:bool) -> u8{
-    //    let mut uRet = 0;
-//
-//
-    //    return uRet;
-    //}
-//
-    //fn set_active_by_index(&self,row:u32,col:u32) -> bool {
-    //    let mut uRet = 0;
-//
-    //    uRet+= self.get_active_by_table_id(self.get_static_indices(),row,col,true);
-    //    uRet+= self.get_active_by_table_id(self.get_current_min_cfg(),row,col,true);
-    //    uRet+= self.get_active_by_table_id(self.get_current_hour_cfg(),row,col,true);
-    //    uRet+= self.get_active_by_table_id(self.get_oclock_indices(),row,col,self.current_time.minute() < 5);
-    //    uRet+= self.get_active_by_table_id(self.get_am_indices(),row,col,self.current_time.hour() <= 12);
-    //    uRet+= self.get_active_by_table_id(self.get_pm_indices(),row,col,self.current_time.hour() > 12);
-//
-    //    return uRet > 0;
-    //}
 }
-
 
 
 fn main() {
     println!("wqSimulation entry point");
     
-    let mut now = Instant::now();
+    let now = Instant::now();
     let interval = 5;
 
-    let letter_field = [["E","S","K","I","S","T","A","F","Ü","N","F"],
-                        ["Z","E","H","N","Z","W","A","N","Z","I","G"],
-                        ["D","R","E","I","V","I","E","R","T","E","L"],
-                        ["V","O","R","F","U","N","K","N","A","C","H"],
-                        ["H","A","L","B","A","E","L","F","U","N","F"],
-                        ["E","I","N","S","X","A","M","Z","W","E","I"],
-                        ["D","R","E","I","P","M","J","V","I","E","R"],
-                        ["S","E","C","H","S","B","L","A","C","H","T"],
-                        ["S","I","E","B","E","N","Z","W","Ö","L","F"],
-                        ["Z","E","H","N","E","U","N","K","U","H","R"]];
-
-    let mut time_layout = TimeLayout::new();
-
     let mut time_handler = TimeHandler::new();
-    time_handler.get_current_min_cfg();
 
     loop {
         //Read Time
         if now.elapsed().as_secs() > interval
         {
             //Update cycles are 
-            println!("Another 5s wasted");
-            now = Instant::now();
-
-
+            time_handler.set_letter_bit_values();
             //Update Time
 
             //Set Bitmaps
