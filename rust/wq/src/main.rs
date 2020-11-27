@@ -284,6 +284,8 @@ impl TimeHandler {
 
 
 fn main() {
+    println!("wqSimulation entry point");
+    
     let mut now = Instant::now();
     let interval = 5;
 
@@ -296,8 +298,11 @@ fn main() {
             //set bitmaps for current time
             time_handler.set_letter_bit_values();
             //print the bitmap as "bits"
-            //time_handler.print_letter_bit_map();
-            //time_handler.print_letter_wq_layout();
+            println!("###################################");
+            time_handler.print_letter_bit_map();
+            println!("###################################");
+            time_handler.print_letter_wq_layout();
+            println!("###################################");
             //update the time for control again
             now = Instant::now();
         }
