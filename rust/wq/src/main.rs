@@ -1,7 +1,7 @@
 
 use std::time::{Instant};
 use chrono::prelude::*;
-use rpi_led_matrix::{LedMatrix, LedColor};
+use rpi_led_matrix::{LedMatrix, LedColor,LedMatrixOptions};
 
 
 struct Time2IndexCfg {
@@ -291,7 +291,10 @@ fn main() {
     let interval = 5;
 
     let mut time_handler = TimeHandler::new();
-    let matrix = LedMatrix::new(None, None).unwrap();
+
+    let mut matrix_options =LedMatrixOptions::new();
+    matrix_options.set_hardware_mapping("adafruit-hat-pwm");
+    let matrix = LedMatrix::new(Some(matrix_options), None).unwrap();
     let mut canvas = matrix.offscreen_canvas();
     for red in 0..255 {
         for green in 0..255 {
