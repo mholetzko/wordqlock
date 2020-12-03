@@ -293,7 +293,7 @@ fn main() {
     let mut time_handler = TimeHandler::new();
 
     let mut matrix_options =LedMatrixOptions::new();
-    matrix_options.set_hardware_mapping("adafruit-hat-pwm");
+    matrix_options.set_hardware_mapping("adafruit-hat");
     let matrix = LedMatrix::new(Some(matrix_options), None).unwrap();
     let mut canvas = matrix.offscreen_canvas();
     for red in 0..255 {
